@@ -1,0 +1,109 @@
+// Postgres-ready domain model mirroring lib/domain/types.ts. Not wired yet: the app runs on lib/store.ts.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Stage { new contacted qualified booked won lost }
+enum Source { website facebook_ads google_ads referral instagram other }
+enum Budget { under_1k k1_5k @map("1k_5k") k5_15k @map("5k_15k") k15_plus @map("15k_plus") }
+enum Timeline { now days_30 @map("30_days") days_90 @map("90_days") exploring }
+enum Role { owner executive manager individual }
+enum Tier { hot warm cold }
+enum Direction { inbound outbound }
+enum Author { lead ai_agent rep }
+
+model Rep {
+  id            String             @id @default(cuid())
+  name          String
+  email         String             @unique
+  leads         Lead[]
+  bookings      Booking[]
+  notifications SalesNotification[]
+}
+
+model Lead {
+  id              String    @id @default(cuid())
+  name            String
+  email           String
+  phone           String?
+  company         String?
+  source          Source
+  budget          Budget
+  timeline        Timeline
+  role            Role
+  need            String
+  stage           Stage     @default(new)
+  score           Int
+  tier            Tier
+  scoreBreakdown  Json
+  reasons         String[]
+  dealValue       Int
+  ownerId         String?
+  owner           Rep?      @relation(fields: [ownerId], references: [id])
+  createdAt       DateTime  @default(now())
+  firstResponseAt DateTime?
+  messages        Message[]
+  bookings        Booking[]
+  activity        ActivityEvent[]
+  notifications   SalesNotification[]
+
+  @@index([stage])
+  @@index([tier])
+  @@index([ownerId])
+  @@index([email])
+}
+
+model Message {
+  id        String    @id @default(cuid())
+  leadId    String
+  lead      Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  direction Direction
+  author    Author
+  body      String
+  sentAt    DateTime  @default(now())
+
+  @@index([leadId, sentAt])
+}
+
+model Booking {
+  id        String   @id @default(cuid())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  repId     String
+  rep       Rep      @relation(fields: [repId], references: [id])
+  start     DateTime
+  end       DateTime
+  createdAt DateTime @default(now())
+
+  @@unique([repId, start])
+  @@index([leadId])
+}
+
+model SalesNotification {
+  id        String   @id @default(cuid())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  repId     String
+  rep       Rep      @relation(fields: [repId], references: [id])
+  ruleId    String
+  summary   String
+  createdAt DateTime @default(now())
+
+  @@index([repId, createdAt])
+}
+
+model ActivityEvent {
+  id     String   @id @default(cuid())
+  leadId String
+  lead   Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  type   String
+  detail String
+  at     DateTime @default(now())
+
+  @@index([leadId, at])
+}

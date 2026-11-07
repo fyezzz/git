@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CodeOpsAcq · The agency operating layer</title>
+<meta name="description" content="CodeOpsAcq connects lead evidence, CRM pipeline, unit economics, developer delivery and admin control in one workspace." />
+<meta property="og:title" content="CodeOpsAcq · The agency operating layer" />
+<meta property="og:description" content="Lead evidence, pipeline, margins, delivery and control. One workspace for agencies that ship." />
+<meta name="theme-color" content="#0B0F17" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2302EF7D'/%3E%3Ctext x='16' y='22' font-family='monospace' font-weight='700' font-size='15' text-anchor='middle' fill='%230B0F17'%3E%7B%7D%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"><span></span></div>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="loader" aria-hidden="true"><div class="loader-bar"><span></span></div><div class="loader-txt mono">INITIALIZING OPERATING LAYER</div></div>
+
+<header class="nav">
+  <a href="#top" class="brand" data-magnetic><span class="logo">{}</span><span>CodeOps<em>Acq</em></span></a>
+  <nav>
+    <a href="#system">System</a>
+    <a href="#economics">Economics</a>
+    <a href="#plans">Plans</a>
+    <a href="#activation">Activation</a>
+  </nav>
+  <a href="#apply" class="btn btn-sm" data-magnetic>Book a diagnosis</a>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <p class="eyebrow mono reveal">The agency operating layer</p>
+    <h1 class="display split">From lead to <span class="neon">shipped.</span><br />One workspace.</h1>
+    <p class="lede reveal">CodeOpsAcq connects lead evidence, CRM pipeline, unit economics, developer delivery and admin control, so every live deal has an owner, a stage and a priced scope.</p>
+    <div class="cta-row reveal">
+      <a href="#apply" class="btn" data-magnetic>Book a 20-min diagnosis <span aria-hidden="true">→</span></a>
+      <a href="#plans" class="btn btn-ghost" data-magnetic>See plans</a>
+    </div>
+    <div class="hero-meta mono reveal">
+      <div><b data-count="6">0</b><span>pipeline stages + Fridge</span></div>
+      <div><b data-count="8">0</b><span>AI command specialists</span></div>
+      <div><b data-count="30">0</b><span>day structured activation</span></div>
+    </div>
+    <div class="scroll-hint mono" aria-hidden="true"><span></span>Scroll</div>
+  </section>
+
+  <div class="marquee mono" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Evidence</span><i>✦</i><span>Pipeline</span><i>✦</i><span>Economics</span><i>✦</i><span>Delivery</span><i>✦</i><span>Control</span><i>✦</i><span>AI Command</span><i>✦</i>
+      <span>Evidence</span><i>✦</i><span>Pipeline</span><i>✦</i><span>Economics</span><i>✦</i><span>Delivery</span><i>✦</i><span>Control</span><i>✦</i><span>AI Command</span><i>✦</i>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section class="problem">
+    <div class="wrap">
+      <p class="eyebrow mono reveal">The leak</p>
+      <h2 class="h2 split">Your agency runs on <span class="neon">seven</span> disconnected tools.</h2>
+      <div class="leak-grid">
+        <article class="leak tilt reveal"><span class="leak-k mono">01 · Flow</span><h3>Leads with no owner</h3><p>Signals sit in inboxes and spreadsheets. Nobody knows who's on the next action.</p></article>
+        <article class="leak tilt reveal"><span class="leak-k mono">02 · Loss</span><h3>Scope without margin</h3><p>Work gets sold before anyone models delivery cost. Profit is a guess until the invoice.</p></article>
+        <article class="leak tilt reveal"><span class="leak-k mono">03 · Control</span><h3>Delivery in the dark</h3><p>Tickets, QA and handoff live in another tool. The founder becomes the integration layer.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYSTEM (pinned horizontal) -->
+  <section class="system" id="system">
+    <div class="system-pin">
+      <div class="system-head wrap">
+        <p class="eyebrow mono">The operating chain</p>
+        <h2 class="h2">Five links. <span class="neon">One</span> source of truth.</h2>
+        <div class="progress"><span></span></div>
+      </div>
+      <div class="rail">
+        <article class="step tilt"><span class="num mono">01 · Evidence</span><h3>Review the signal</h3><p>Review public-source lead signals, approve or reject candidates, and respect suppression lists.</p><div class="chip mono">human-reviewed · no auto-send</div></article>
+        <article class="step tilt"><span class="num mono">02 · Pipeline</span><h3>Own every deal</h3><p>Move deals across six core stages. Paused records park in the Fridge queue, not in limbo.</p><div class="chip mono">6 stages + Fridge</div></article>
+        <article class="step tilt"><span class="num mono">03 · Economics</span><h3>Price before you scope</h3><p>Model client price, delivery cost, gross profit and blended margin before work is promised.</p><div class="chip mono">profit catalog + cart</div></article>
+        <article class="step tilt"><span class="num mono">04 · Delivery</span><h3>Ship through gates</h3><p>Scoped developer tickets with priority, tracked through QA gates to handoff.</p><div class="chip mono">tickets · QA · handoff</div></article>
+        <article class="step tilt"><span class="num mono">05 · Control</span><h3>See the whole machine</h3><p>Activity history, contract drafts, integration states, team capacity and AI operating synthesis.</p><div class="chip mono">AI command · 8 specialists</div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ECONOMICS CALCULATOR -->
+  <section class="equation" id="economics">
+    <div class="wrap">
+      <p class="eyebrow mono reveal">Economics, live</p>
+      <h2 class="h2 split">Know the <span class="neon">margin</span> before you say yes.</h2>
+      <p class="lede reveal">The same model the profit catalog runs on every scoped deal. Drag it.</p>
+      <div class="calc eq reveal tilt">
+        <div class="calc-inputs">
+          <label><span>Client price <output class="mono" id="o-price"></output></span><input type="range" id="i-price" min="1000" max="50000" step="500" value="12000" /></label>
+          <label><span>Delivery cost <output class="mono" id="o-cost"></output></span><input type="range" id="i-cost" min="0" max="40000" step="250" value="5500" /></label>
+          <label><span>Deals / month <output class="mono" id="o-deals"></output></span><input type="range" id="i-deals" min="1" max="20" step="1" value="4" /></label>
+        </div>
+        <div class="calc-out">
+          <div><p class="mono">Gross profit / deal</p><b class="mono" id="r-gp"></b></div>
+          <div><p class="mono">Blended margin</p><b class="mono" id="r-margin"></b></div>
+          <div><p class="mono">Monthly gross profit</p><b class="mono neon" id="r-month"></b></div>
+          <div class="meter" aria-hidden="true"><span id="r-meter"></span></div>
+          <p class="calc-flag mono" id="r-flag" role="status"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section class="plans" id="plans">
+    <div class="wrap">
+      <p class="eyebrow mono reveal">Plans</p>
+      <h2 class="h2 split">Start with the <span class="neon">smallest</span> fit.</h2>
+      <div class="billing reveal" role="group" aria-label="Billing period">
+        <button type="button" class="on" data-billing="mo">Monthly</button><button type="button" data-billing="yr">Annual</button>
+      </div>
+      <div class="plan-grid">
+        <article class="plan tilt reveal">
+          <p class="plan-track mono">Track A · Operators</p>
+          <h3>Starter</h3>
+          <p class="price"><b class="mono" data-mo="$99" data-yr="$1,188">$99</b><span class="per" data-mo="/mo" data-yr="/yr">/mo</span></p>
+          <p class="plan-for">Solo operators and compact agencies who need one source of truth.</p>
+          <ul><li>6-stage CRM + Fridge queue</li><li>Contact context &amp; evidence</li><li>Profit catalog &amp; cart</li><li>Developer ticket flow</li></ul>
+          <a href="#apply" class="btn btn-ghost" data-plan="Starter" data-magnetic>Start with Starter</a>
+        </article>
+        <article class="plan plan-hl tilt reveal">
+          <p class="plan-track mono">Track A · Operators</p>
+          <h3>Growth</h3>
+          <p class="price"><b class="mono" data-mo="$299" data-yr="$3,588">$299</b><span class="per" data-mo="/mo" data-yr="/yr">/mo</span></p>
+          <p class="plan-for">Growing agencies with team members, contractors and multiple workstreams.</p>
+          <ul><li>Everything in Starter</li><li>AI Command Orchestrator (8 specialists)</li><li>Lead Ops review queue + outreach templates</li><li>Team routing &amp; fulfillment visibility</li><li>Marketing Control Room drafts</li><li>Legal Vault contract drafts</li></ul>
+          <a href="#apply" class="btn" data-plan="Growth" data-magnetic>Choose Growth</a>
+        </article>
+        <article class="plan tilt reveal">
+          <p class="plan-track mono">Track B · Incubator builders</p>
+          <h3>Scale Flagship</h3>
+          <p class="price"><b class="mono" data-mo="$999" data-yr="$11,988">$999</b><span class="per" data-mo="/mo + rev share" data-yr="/yr + rev share">/mo + rev share</span></p>
+          <p class="plan-for">Accepted builders launching an agency on CodeOpsAcq. Application only, gated by real developer capacity.</p>
+          <ul><li>Full platform access</li><li>Structured 30-day activation</li><li>Finite 7-developer team build capacity</li><li>Incubator coaching &amp; review schedule</li><li>Rev share: 50% of first eligible collected sale, 20% thereafter, per signed addendum</li></ul>
+          <a href="#apply" class="btn btn-ghost" data-plan="Scale Flagship (application)" data-magnetic>Apply for Scale</a>
+        </article>
+      </div>
+      <p class="fine reveal">CodeOpsAcq guarantees defined platform access, structured activation and developer capacity terms. It does not guarantee lead volume, booked calls, close rates or revenue. Outreach always requires human action.</p>
+    </div>
+  </section>
+
+  <!-- ACTIVATION -->
+  <section class="activation" id="activation">
+    <div class="wrap">
+      <p class="eyebrow mono reveal">30-day activation</p>
+      <h2 class="h2 split">Live in <span class="neon">thirty</span> days. Here's every one.</h2>
+      <ol class="timeline">
+        <li class="reveal"><span class="mono">Days 1–3</span><h3>Workspace setup</h3><p>Users, roles, pipeline names, source data, reporting rules and plan entitlements mapped.</p></li>
+        <li class="reveal"><span class="mono">Days 4–10</span><h3>Revenue load</h3><p>Active contacts and opportunities imported, each with stage, owner, value and next action.</p></li>
+        <li class="reveal"><span class="mono">Days 11–20</span><h3>Pricing &amp; routing</h3><p>Services mapped to catalog items, cost and margin inputs set, test tickets validate developer routing.</p></li>
+        <li class="reveal"><span class="mono">Days 21–30</span><h3>Review cadence</h3><p>Weekly operating reviews on AI command synthesis, fulfillment capacity and margin outputs.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- APPLY -->
+  <section class="book" id="apply">
+    <div class="wrap book-grid">
+      <div>
+        <p class="eyebrow mono reveal">Diagnosis first</p>
+        <h2 class="h2 split">Twenty minutes. Five <span class="neon">questions.</span></h2>
+        <p class="lede reveal">Flow, Loss, Control, Ownership, Path. We find the constraint, then prescribe the smallest plan that fixes it, even if that's Starter.</p>
+      </div>
+      <form class="form reveal" id="lead-form" novalidate>
+        <label>Name<input name="name" required autocomplete="name" placeholder="Jane Operator" /></label>
+        <label>Email<input name="email" type="email" required autocomplete="email" placeholder="jane@agency.com" /></label>
+        <label>Agency<input name="company" autocomplete="organization" /></label>
+        <label>Interested in
+          <select name="plan"><option>Starter</option><option selected>Growth</option><option>Scale Flagship (application)</option><option>Not sure yet</option></select>
+        </label>
+        <label class="full">Biggest constraint right now<textarea name="need" rows="3" placeholder="Deals have no owner, we price before we know delivery cost…"></textarea></label>
+        <button class="btn full" type="submit" data-magnetic>Book my diagnosis →</button>
+        <p class="form-msg full" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot wrap">
+  <span class="mono">© <span id="yr"></span> CodeOpsAcq</span>
+  <a href="#top" class="mono">Back to top ↑</a>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous"></script>
+<script src="config.js"></script>
+<script type="module" src="main.js"></script>
+</body>
+</html>

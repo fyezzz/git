@@ -29,6 +29,7 @@ async function createDriver(): Promise<Driver> {
   }
   const { PGlite } = await import("@electric-sql/pglite");
   const dir = process.env.PGLITE_DIR ?? join(process.cwd(), ".data", "pg");
+  if (dir !== "memory") (await import("node:fs")).mkdirSync(dir, { recursive: true });
   const pg = await PGlite.create(dir === "memory" ? undefined : dir);
   return {
     query: async <T,>(text: string, params: Params) => (await pg.query<T>(text, params)).rows,

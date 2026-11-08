@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { dbMissing, NeedsDb } from "@/components/needs-db";
 import { Sidebar } from "@/components/app/sidebar";
 import { ToastProvider } from "@/components/app/toast";
 import { getSettings } from "@/lib/data";
@@ -23,6 +24,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     return <div className="grid min-h-screen place-items-center p-6 text-center"><div><h1 className="text-xl font-semibold">Workspace locked</h1><p className="mt-2 text-muted">Set the <code className="text-neon">APP_PASSWORD</code> environment variable on the server, then reload.</p></div></div>;
   }
   if (!(await hasSession())) redirect("/login?next=/app");
+  if (dbMissing()) return <NeedsDb />;
   const [settings, role] = await Promise.all([getSettings(), currentRole()]);
   return (
     <ToastProvider>

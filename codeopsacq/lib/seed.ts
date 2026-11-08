@@ -255,11 +255,12 @@ const MANUAL: [string, string, string, number, number, string, string][] = [
   ["engagement", "Community", "Engagement", 38.5, 45, "pct", "up"],
 ];
 
-export function seedSql(): string {
+/** demo=false (production default) seeds only starter content: settings, members, catalog, developers, templates, routing, legal templates. No deals, revenue, wins or traffic. */
+export function seedSql(demo = process.env.SEED_DEMO === "1" || process.env.NODE_ENV !== "production"): string {
   const parts: string[] = [];
   parts.push("INSERT INTO settings (id) VALUES (1) ON CONFLICT DO NOTHING;");
   parts.push(rows("members", ["id", "name", "initials", "title"], MEMBERS));
-  parts.push(
+  if (demo) parts.push(
     ...DEALS.map(([company, industry, title, seats, value, stage, ai, signal, owner, channel, age]) => {
       const engine = ENGINE[company] ?? null;
       const attribution = JSON.stringify({ first: { channel, engine, source: engine ? `${engine}.com` : channel, confidence: engine ? "referrer" : "utm" } });
@@ -268,13 +269,13 @@ export function seedSql(): string {
 VALUES (${lit(company)}, ${lit(industry)}, ${lit(title)}, ${lit(seats)}, ${$(value)}, ${lit(stage)}, ${ai}, ${lit(signal)}, ${lit(owner)}, ${lit(channel)}, ${lit(engine)}, ${lit(attribution)}::jsonb, ${daysAgo(age)}, ${daysAgo(Math.max(0, age - 3))}, ${daysAgo(age)} + interval '3 minutes 40 seconds', ${closed}, NULL, NULL);`;
     }),
   );
-  parts.push(
+  if (demo) parts.push(
     ...SUBSCRIPTIONS.map(
       ([client, plan, mrr, status, age]) =>
         `INSERT INTO subscriptions (client, plan, mrr_cents, status, started_at, cancelled_at) VALUES (${lit(client)}, ${lit(plan)}, ${$(mrr)}, ${lit(status)}, ${daysAgo(age)}, ${status === "cancelled" ? daysAgo(10) : "NULL"});`,
     ),
   );
-  parts.push(rows("lead_reviews", ["name", "category", "contributors", "evidence", "classification", "score"], REVIEWS));
+  if (demo) parts.push(rows("lead_reviews", ["name", "category", "contributors", "evidence", "classification", "score"], REVIEWS));
   parts.push(rows("suppression", ["value", "reason"], [["donotcontact@example.com", "Opted out"], ["competitor-co.com", "Competitor domain"]]));
   parts.push(rows("sequences", ["name", "touches", "enrolled", "status"], [["Outbound · agencies", 3, 18, "active"], ["Inbound nurture", 3, 31, "active"], ["Reactivation", 3, 9, "active"]]));
   parts.push(rows("catalog_items", ["category", "name", "description", "kind", "price_cents", "cost_cents", "price_min_cents", "price_max_cents"], CATALOG.map(([c, n, d, k, p, cost]) => [c, n, d, k, p === null ? null : $(p), $(cost), null, null])));
@@ -283,22 +284,22 @@ VALUES (${lit(company)}, ${lit(industry)}, ${lit(title)}, ${lit(seats)}, ${$(val
   }
   parts.push(rows("catalog_items", ["category", "name", "description", "kind", "price_cents", "cost_cents", "price_min_cents", "price_max_cents"], ENTERPRISE.map(([n, d, min, max]) => ["Enterprise builds", n, d, "enterprise", null, 0, $(min), $(max)])));
   parts.push(rows("developers", ["id", "label", "initials", "specialty", "slots"], DEVS));
-  parts.push(
+  if (demo) parts.push(
     ...TICKETS.map(
       ([title, type, prio, stage, progress, dev, due]) =>
         `INSERT INTO tickets (title, project_type, priority, stage, progress, developer_id, due_date, requirements, delivered_at, created_at) VALUES (${lit(title)}, ${lit(type)}, ${lit(prio)}, ${lit(stage)}, ${progress}, ${lit(dev)}, (current_date + ${due}), 'Requirements approved in scoping call.', ${stage === "delivered" ? daysAgo(6) : "NULL"}, ${daysAgo(18)});`,
     ),
   );
-  parts.push(`UPDATE tickets SET cost_cents = (4000 + length(title) * 250) * 100, price_cents = round((4000 + length(title) * 250) * 100 * CASE WHEN title LIKE 'Webhook%' THEN 1.45 ELSE 2.4 END) WHERE stage <> 'scoping';`);
+  if (demo) parts.push(`UPDATE tickets SET cost_cents = (4000 + length(title) * 250) * 100, price_cents = round((4000 + length(title) * 250) * 100 * CASE WHEN title LIKE 'Webhook%' THEN 1.45 ELSE 2.4 END) WHERE stage <> 'scoping';`);
   parts.push(rows("templates", ["channel", "name", "summary", "body", "status"], TEMPLATES));
   parts.push(rows("routing_rules", ["name", "match", "destination", "sla_minutes", "status", "sort"], RULES));
   parts.push(rows("legal_templates", ["name", "summary", "body"], LEGAL.map(([n, s]) => [n, s, `${n.toUpperCase()}\n\nThis template is for attorney review before use.\n\n1. Parties. {{client_name}} ("Client") and CodeOpsAcq ("Provider").\n2. Purpose. ${s}\n3. Term. Effective {{effective_date}}.\n4. Governing law. {{jurisdiction}}.\n\nSigned: ____________________   Date: __________`])));
-  parts.push(rows("landing_pages", ["title", "path", "kind", "status"], [["Agency operating system", "/", "web", "published"], ["Pricing", "/pricing", "web", "published"], ["AI lead attribution", "/solutions/ai-lead-attribution", "web", "draft"], ["Profit calculator", "/solutions/agency-profit-calculator", "web", "draft"], ["Nurture: margin teardown", "email/margin-teardown", "email", "published"], ["Outbound: speed-to-lead", "email/speed-to-lead", "email", "published"], ["Reactivation", "email/reactivation", "email", "draft"]]));
-  parts.push(rows("manual_metrics", ["key", "grp", "label", "value", "target", "unit", "better"], MANUAL));
-  parts.push(
+  if (demo) parts.push(rows("landing_pages", ["title", "path", "kind", "status"], [["Agency operating system", "/", "web", "published"], ["Pricing", "/pricing", "web", "published"], ["AI lead attribution", "/solutions/ai-lead-attribution", "web", "draft"], ["Profit calculator", "/solutions/agency-profit-calculator", "web", "draft"], ["Nurture: margin teardown", "email/margin-teardown", "email", "published"], ["Outbound: speed-to-lead", "email/speed-to-lead", "email", "published"], ["Reactivation", "email/reactivation", "email", "draft"]]));
+  if (demo) parts.push(rows("manual_metrics", ["key", "grp", "label", "value", "target", "unit", "better"], MANUAL));
+  if (demo) parts.push(
     `INSERT INTO wins (deal_id, title, amount_cents, closed_by, created_at) SELECT id, company || ' · ' || title, value_cents, owner_id, closed_at FROM deals WHERE stage = 'won' ON CONFLICT DO NOTHING;`,
   );
-  parts.push(
+  if (demo) parts.push(
     rows("audit_log", ["source", "action", "detail"], [
       ["Lead ops", "Lead approved into Target", "Orbit Stack moved from review queue"],
       ["Fulfillment", "Software ticket assigned", "Client intake automation portal routed to Developer A"],
@@ -307,7 +308,7 @@ VALUES (${lit(company)}, ${lit(industry)}, ${lit(title)}, ${lit(seats)}, ${$(val
     ]),
   );
   // Representative traffic for the attribution report (last 30 days).
-  parts.push(`INSERT INTO page_views (visitor_id, path, channel, ai_engine, source, at)
+  if (demo) parts.push(`INSERT INTO page_views (visitor_id, path, channel, ai_engine, source, at)
 SELECT 'seed-' || g, (ARRAY['/','/pricing','/solutions/agency-crm','/book'])[1 + (g % 4)],
   (ARRAY['ai_assistant','organic_search','direct','referral','paid','social','ai_assistant','organic_search'])[1 + (g % 8)],
   CASE WHEN g % 8 IN (0,6) THEN (ARRAY['chatgpt','perplexity','claude','gemini','copilot'])[1 + (g % 5)] END,

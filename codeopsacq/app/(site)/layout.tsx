@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { JsonLd } from "@/components/json-ld";
+import { Wordmark } from "@/components/logo";
 import { Tracker } from "@/components/tracker";
 import { PLANS, SITE, SOLUTIONS } from "@/lib/site";
 
@@ -28,8 +29,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <header className="sticky top-0 z-40 border-b border-line/60 bg-ink/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold" aria-label={`${SITE.name} home`}>
-            <span className="grid size-8 place-items-center rounded-lg bg-neon font-mono text-sm font-bold text-ink">{"{}"}</span>
-            CodeOps<span className="text-neon">Acq</span>
+            <Wordmark />
           </Link>
           <nav aria-label="Primary" className="hidden items-center gap-6 text-sm text-muted md:flex">
             <Link href="/solutions/ai-lead-attribution" className="hover:text-text">AI attribution</Link>

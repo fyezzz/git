@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { LogoMark } from "@/components/logo";
 import type { Role } from "@/lib/session";
 
 export const NAV: { group: string; items: { href: string; label: string; roles?: Role[] }[] }[] = [
@@ -40,7 +41,7 @@ export function Sidebar({ role, workspace, setRole }: { role: Role; workspace: s
     <aside className="border-b border-line bg-ink-2 lg:sticky lg:top-0 lg:h-screen lg:w-64 lg:shrink-0 lg:overflow-y-auto lg:border-b-0 lg:border-r">
       <div className="flex items-center justify-between gap-2 px-4 py-4">
         <Link href="/app" className="flex items-center gap-2 font-semibold">
-          <span className="grid size-8 place-items-center rounded-lg bg-neon font-mono text-sm font-bold text-ink">{"{}"}</span>
+          <LogoMark size={30} />
           <span className="leading-tight"><span className="block text-sm">{workspace}</span><span className="flex items-center gap-1 text-[11px] font-normal text-muted"><span className="size-1.5 rounded-full bg-neon" /> Live workspace</span></span>
         </Link>
       </div>

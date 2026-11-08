@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { LogoMark } from "@/components/logo";
 import { authMode, SESSION_COOKIE, sessionToken, verifyPassword } from "@/lib/session";
 
 export const metadata: Metadata = { title: "Sign in", robots: { index: false } };
@@ -19,7 +20,7 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
   return (
     <main className="grid min-h-screen place-items-center px-4">
       <form action={login} className="card w-full max-w-sm p-6">
-        <span className="grid size-10 place-items-center rounded-xl bg-neon font-mono font-bold text-ink">{"{}"}</span>
+        <LogoMark size={40} />
         <h1 className="mt-4 text-xl font-semibold">Sign in to CodeOpsAcq</h1>
         <input type="hidden" name="next" value={next ?? "/app"} />
         <label className="label mt-6" htmlFor="password">Workspace password</label>

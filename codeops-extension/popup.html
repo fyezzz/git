@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>CodeOps</title><link rel="stylesheet" href="popup.css"></head>
+<body>
+  <header><img src="mark.svg" alt="" width="26" height="26"><span>Code<b>Ops</b></span><button id="lock" class="ghost sm" hidden>Lock</button></header>
+
+  <section id="gate">
+    <h1>Invite only</h1>
+    <p class="muted">Enter the invite code you were given.</p>
+    <form id="inviteForm"><input id="code" placeholder="COPS-XXXX-XXXX" autocomplete="off" spellcheck="false" maxlength="64" required><button class="primary">Unlock</button></form>
+    <p id="gateMsg" class="msg" role="status"></p>
+  </section>
+
+  <section id="app" hidden>
+    <button id="open" class="primary wide">Open CodeOps ↗</button>
+    <h2>Capture this page as a lead</h2>
+    <form id="capture">
+      <input id="name" placeholder="Company or person" required maxlength="120">
+      <input id="contact" placeholder="Email or phone (optional)" maxlength="120">
+      <textarea id="notes" rows="3" placeholder="Notes / selected text" maxlength="2000"></textarea>
+      <button class="primary wide">Save lead</button>
+    </form>
+    <p id="capMsg" class="msg" role="status"></p>
+    <div class="row"><h2>Saved leads <span id="count" class="muted"></span></h2><button id="csv" class="ghost sm">Export CSV</button></div>
+    <ul id="list"></ul>
+    <label class="toggle"><input type="checkbox" id="showMark"> Show the [&gt; mark on pages</label>
+  </section>
+  <script type="module" src="popup.js"></script>
+</body></html>

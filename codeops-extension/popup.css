@@ -1,0 +1,17 @@
+*{box-sizing:border-box}body{width:340px;margin:0;background:#060a08;color:#e8edf5;font:13px Inter,system-ui,sans-serif}
+header{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid #16251d;font-weight:700;font-size:15px}
+header b{background:linear-gradient(90deg,#b6ffd9,#02ef7d,#0a8f4f);-webkit-background-clip:text;background-clip:text;color:transparent}
+header img{filter:drop-shadow(0 0 6px #02ef7d88)}#lock{margin-left:auto}
+section{padding:14px}h1{margin:0 0 4px;font-size:18px}h2{margin:14px 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#8b95a8}
+.muted{color:#8b95a8}.msg{min-height:16px;margin:8px 0 0;font-size:12px}.msg.ok{color:#02ef7d}.msg.err{color:#ff5c7a}
+input,textarea{width:100%;background:#0d1712;border:1px solid #1d3327;color:#e8edf5;border-radius:10px;padding:9px 10px;font:inherit;margin-bottom:8px;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:#02ef7d;box-shadow:0 0 0 3px #02ef7d22}
+form#inviteForm{display:flex;gap:8px}form#inviteForm input{margin:0;text-transform:uppercase;letter-spacing:.06em}
+button{border:0;border-radius:10px;padding:9px 12px;font:inherit;font-weight:700;cursor:pointer}
+.primary{background:linear-gradient(135deg,#5dff9f,#02ef7d 50%,#0a8f4f);color:#03140b;box-shadow:0 8px 24px -10px #02ef7d}
+.primary:hover{filter:brightness(1.08)}.primary:disabled{opacity:.6;cursor:wait}
+.ghost{background:none;border:1px solid #1d3327;color:#e8edf5}.ghost:hover{border-color:#02ef7d;color:#02ef7d}.sm{padding:5px 9px;font-size:11px}
+.wide{width:100%}.row{display:flex;align-items:center;justify-content:space-between}.row h2{margin:14px 0 8px}
+ul{list-style:none;margin:0;padding:0;max-height:180px;overflow:auto}li{border:1px solid #16251d;border-radius:10px;padding:8px 10px;margin-bottom:6px}
+li a{color:#5dff9f;text-decoration:none;font-size:11px;word-break:break-all}li .x{float:right;background:none;color:#8b95a8;padding:0 4px;font-weight:400}
+.toggle{display:flex;align-items:center;gap:8px;margin-top:12px;color:#8b95a8}.toggle input{width:auto;margin:0;accent-color:#02ef7d}

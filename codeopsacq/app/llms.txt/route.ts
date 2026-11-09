@@ -6,6 +6,8 @@ export function GET() {
 
 > ${SITE.description}
 
+Name: ${SITE.name} (also written ${SITE.alternateName}). ${SITE.disambiguation}
+
 ${SITE.name} is for digital agencies, dev shops and agency builders. It runs one chain: Evidence → Pipeline → Economics → Delivery → Control.
 
 Key facts:

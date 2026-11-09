@@ -39,6 +39,29 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
           <section key={p.h} className="card p-6"><h2 className="text-lg font-semibold">{p.h}</h2><p className="mt-2 text-muted">{p.p}</p></section>
         ))}
       </div>
+      {s.steps && (
+        <section className="mt-16">
+          <h2 className="text-2xl font-bold">How {s.keyword.toLowerCase()} works in CodeOpsAcq</h2>
+          <ol className="mt-6 space-y-3">{s.steps.map((st, i) => <li className="card flex gap-4 p-5" key={st}><span className="font-mono text-neon">{String(i + 1).padStart(2, "0")}</span><p className="text-muted">{st}</p></li>)}</ol>
+        </section>
+      )}
+      {s.forWho && (
+        <section className="mt-16">
+          <h2 className="text-2xl font-bold">Who it is for</h2>
+          <ul className="mt-6 grid gap-3 md:grid-cols-3">{s.forWho.map((w) => <li className="card p-5 text-muted" key={w}>{w}</li>)}</ul>
+        </section>
+      )}
+      {s.compare && (
+        <section className="mt-16">
+          <h2 className="text-2xl font-bold">CodeOpsAcq vs the usual tool stack</h2>
+          <div className="card mt-6 overflow-x-auto">
+            <table className="w-full min-w-[560px] text-sm">
+              <thead className="text-left text-xs uppercase tracking-wider text-muted"><tr><th className="p-4" scope="col"></th><th className="p-4" scope="col">Typical stack</th><th className="p-4 text-neon" scope="col">CodeOpsAcq</th></tr></thead>
+              <tbody className="divide-y divide-line">{s.compare.map(([a, t, c]) => <tr key={a}><th className="p-4 text-left font-medium" scope="row">{a}</th><td className="p-4 text-muted">{t}</td><td className="p-4">{c}</td></tr>)}</tbody>
+            </table>
+          </div>
+        </section>
+      )}
       <section className="mt-16"><h2 className="mb-6 text-2xl font-bold">{s.keyword}: common questions</h2><FaqList items={s.faqs} /></section>
       <section className="mt-16"><h2 className="mb-4 text-lg font-semibold">Related</h2><ul className="grid gap-2 md:grid-cols-2">{others.map((o) => <li key={o.slug}><Link className="text-neon hover:underline" href={`/solutions/${o.slug}`}>{o.title}</Link></li>)}</ul></section>
     </article>

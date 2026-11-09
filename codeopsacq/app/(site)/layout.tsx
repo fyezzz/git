@@ -10,12 +10,13 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <Tracker />
       <JsonLd
         data={[
-          { "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE.url}/#org`, name: SITE.name, url: SITE.url, email: SITE.email, description: SITE.description, logo: `${SITE.url}/icon.svg` },
+          { "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE.url}/#org`, name: SITE.name, alternateName: SITE.alternateName, disambiguatingDescription: SITE.disambiguation, url: SITE.url, email: SITE.email, description: SITE.description, logo: `${SITE.url}/icon.svg` },
           { "@context": "https://schema.org", "@type": "WebSite", "@id": `${SITE.url}/#site`, name: SITE.name, url: SITE.url, publisher: { "@id": `${SITE.url}/#org` } },
           {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
             name: SITE.name,
+            alternateName: SITE.alternateName,
             applicationCategory: "BusinessApplication",
             operatingSystem: "Web",
             description: SITE.description,

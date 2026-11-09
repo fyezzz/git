@@ -21,11 +21,11 @@ export default async function Settings() {
       <div className="grid gap-6 xl:grid-cols-2">
         <Card title="Workspace">
           <ActionForm action={saveSettings} reset={false} className="grid gap-3 sm:grid-cols-2">
-            <div><label className="label">Workspace name</label><input className="input" name="workspace_name" defaultValue={s.workspace_name} required /></div>
-            <div><label className="label">Timezone</label><select className="input" name="timezone" defaultValue={s.timezone}>{zones.map((z) => <option key={z}>{z}</option>)}</select></div>
-            <div><label className="label">MRR target (USD)</label><input className="input" name="mrr_target" type="number" min="0" defaultValue={s.mrr_target_cents / 100} /></div>
-            <div><label className="label">Pipeline target (USD)</label><input className="input" name="pipeline_target" type="number" min="0" defaultValue={s.pipeline_target_cents / 100} /></div>
-            <div className="sm:col-span-2"><label className="label">Contact email</label><input className="input" name="contact_email" type="email" defaultValue={s.contact_email} required /></div>
+            <div><label className="label" htmlFor="f-workspace_name">Workspace name</label><input id="f-workspace_name" className="input" name="workspace_name" defaultValue={s.workspace_name} required /></div>
+            <div><label className="label" htmlFor="f-timezone">Timezone</label><select id="f-timezone" className="input" name="timezone" defaultValue={s.timezone}>{zones.map((z) => <option key={z}>{z}</option>)}</select></div>
+            <div><label className="label" htmlFor="f-mrr_target">MRR target (USD)</label><input id="f-mrr_target" className="input" name="mrr_target" type="number" min="0" defaultValue={s.mrr_target_cents / 100} /></div>
+            <div><label className="label" htmlFor="f-pipeline_target">Pipeline target (USD)</label><input id="f-pipeline_target" className="input" name="pipeline_target" type="number" min="0" defaultValue={s.pipeline_target_cents / 100} /></div>
+            <div className="sm:col-span-2"><label className="label" htmlFor="f-contact_email">Contact email</label><input id="f-contact_email" className="input" name="contact_email" type="email" defaultValue={s.contact_email} required /></div>
             <button className="btn btn-primary sm:col-span-2">Save settings</button>
           </ActionForm>
         </Card>

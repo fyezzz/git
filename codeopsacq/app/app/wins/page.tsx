@@ -14,9 +14,9 @@ export default async function Wins() {
       <div className="mt-6 grid gap-6 xl:grid-cols-3">
         <Card title="Log a closed deal or milestone">
           <ActionForm action={logWin} className="grid gap-3">
-            <div><label className="label">Deal / milestone</label><input className="input" name="title" required placeholder="Acme · Ops portal" /></div>
-            <div><label className="label">Amount (USD)</label><input className="input" name="amount" type="number" min="0" step="100" required /></div>
-            <div><label className="label">Closed by</label><select className="input" name="closed_by">{members.map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}</select></div>
+            <div><label className="label" htmlFor="f-title">Deal / milestone</label><input id="f-title" className="input" name="title" required placeholder="Acme · Ops portal" /></div>
+            <div><label className="label" htmlFor="f-amount">Amount (USD)</label><input id="f-amount" className="input" name="amount" type="number" min="0" step="100" required /></div>
+            <div><label className="label" htmlFor="f-closed_by">Closed by</label><select id="f-closed_by" className="input" name="closed_by">{members.map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}</select></div>
             <button className="btn btn-primary">Celebrate win 🎉</button>
           </ActionForm>
           <p className="mt-3 text-xs text-muted">Discord, Skool and Whop posting activates when those integrations are connected in Settings.</p>

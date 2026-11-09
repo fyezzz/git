@@ -24,7 +24,7 @@ export function Card({ title, subtitle, action, children, className = "" }: { ti
   return (
     <section className={`card p-5 ${className}`}>
       {(title || action) && (
-        <div className="mb-4 flex items-start justify-between gap-3">
+        <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
           <div>
             {title && <h2 className="font-semibold">{title}</h2>}
             {subtitle && <p className="mt-0.5 text-xs text-muted">{subtitle}</p>}
@@ -44,7 +44,7 @@ export function Stat({ label, value, sub, delta, good }: { label: string; value:
         <p className="kicker text-[10px]">{label}</p>
         {delta && <span className={`rounded-full border px-2 py-0.5 font-mono text-[11px] ${good ? "border-neon/40 text-neon" : "border-danger/40 text-danger"}`}>{delta}</span>}
       </div>
-      <p className="mt-3 font-mono text-3xl font-semibold tracking-tight">{value}</p>
+      <p className="mt-3 truncate font-mono text-xl font-semibold tracking-tight sm:text-2xl lg:text-3xl" title={value}>{value}</p>
       {sub && <p className="mt-1 text-xs text-muted">{sub}</p>}
     </div>
   );

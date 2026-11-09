@@ -33,20 +33,20 @@ export default async function Tickets() {
         </div>
         <Card title="Ticket to dev" subtitle="Create a fulfillment brief" className="h-fit xl:sticky xl:top-20">
           <ActionForm action={createTicket} className="grid gap-3">
-            <div><label className="label">Title</label><input className="input" name="title" required placeholder="Client intake portal" /></div>
+            <div><label className="label" htmlFor="f-title">Title</label><input id="f-title" className="input" name="title" required placeholder="Client intake portal" /></div>
             <div className="grid grid-cols-2 gap-3">
-              <div><label className="label">Project type</label><select className="input" name="project_type">{["Web application", "AI automation", "Integration", "Internal tool", "Mobile experience", "Automation"].map((x) => <option key={x}>{x}</option>)}</select></div>
-              <div><label className="label">Priority</label><select className="input" name="priority"><option value="standard">Standard</option><option value="high">High</option><option value="urgent">Urgent</option></select></div>
+              <div><label className="label" htmlFor="f-project_type">Project type</label><select id="f-project_type" className="input" name="project_type">{["Web application", "AI automation", "Integration", "Internal tool", "Mobile experience", "Automation"].map((x) => <option key={x}>{x}</option>)}</select></div>
+              <div><label className="label" htmlFor="f-priority">Priority</label><select id="f-priority" className="input" name="priority"><option value="standard">Standard</option><option value="high">High</option><option value="urgent">Urgent</option></select></div>
             </div>
-            <div><label className="label">Requirements</label><textarea className="input" name="requirements" rows={4} required placeholder="Acceptance criteria, integrations, handoff…" /></div>
+            <div><label className="label" htmlFor="f-requirements">Requirements</label><textarea id="f-requirements" className="input" name="requirements" rows={4} required placeholder="Acceptance criteria, integrations, handoff…" /></div>
             <div className="grid grid-cols-2 gap-3">
-              <div><label className="label">Assignment</label><select className="input" name="assignment"><option value="auto">Route to available dev</option><option value="unassigned">Unassigned</option><option value="review">Needs technical review</option></select></div>
-              <div><label className="label">Stage</label><select className="input" name="stage">{TICKET_STAGES.slice(0, 3).map((s) => <option key={s} value={s}>{TICKET_STAGE_LABEL[s]}</option>)}</select></div>
+              <div><label className="label" htmlFor="f-assignment">Assignment</label><select id="f-assignment" className="input" name="assignment"><option value="auto">Route to available dev</option><option value="unassigned">Unassigned</option><option value="review">Needs technical review</option></select></div>
+              <div><label className="label" htmlFor="f-stage">Stage</label><select id="f-stage" className="input" name="stage">{TICKET_STAGES.slice(0, 3).map((s) => <option key={s} value={s}>{TICKET_STAGE_LABEL[s]}</option>)}</select></div>
             </div>
             <div className="grid grid-cols-3 gap-3">
-              <div><label className="label">Price $</label><input className="input" name="price" type="number" min="0" defaultValue="0" /></div>
-              <div><label className="label">Cost $</label><input className="input" name="cost" type="number" min="0" defaultValue="0" /></div>
-              <div><label className="label">Due</label><input className="input" name="due_date" type="date" /></div>
+              <div><label className="label" htmlFor="f-price">Price $</label><input id="f-price" className="input" name="price" type="number" min="0" defaultValue="0" /></div>
+              <div><label className="label" htmlFor="f-cost">Cost $</label><input id="f-cost" className="input" name="cost" type="number" min="0" defaultValue="0" /></div>
+              <div><label className="label" htmlFor="f-due_date">Due</label><input id="f-due_date" className="input" name="due_date" type="date" /></div>
             </div>
             <button className="btn btn-primary">Create ticket</button>
           </ActionForm>

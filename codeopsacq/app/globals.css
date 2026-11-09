@@ -39,7 +39,7 @@ body { -webkit-font-smoothing: antialiased; }
 .input:focus { outline: none; border-color: var(--color-neon); box-shadow: 0 0 0 3px #02ef7d22; }
 .label { display: block; margin-bottom: .35rem; font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--color-muted); }
 
-.card { border: 1px solid var(--color-line); background: var(--color-panel); border-radius: 1rem; }
+.card { border: 1px solid var(--color-line); background: var(--color-panel); border-radius: 1rem; min-width: 0; }
 .kicker { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--color-muted); }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

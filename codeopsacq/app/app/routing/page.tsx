@@ -12,9 +12,9 @@ export default async function Routing() {
       <Header title="Team routing" subtitle="Route work by expertise, capacity and escalation threshold." what="Assignment logic" why="Match work to skill, capacity and escalation rules." start="Inspect the route before changing ownership."
         actions={<Modal trigger="+ Add rule" title="Add routing rule">{(
           <ActionForm action={saveRule} className="grid gap-3" success="Rule added">
-            <div><label className="label">Rule name</label><input className="input" name="name" required /></div>
-            <div><label className="label">Match</label><input className="input" name="match" required placeholder="Integration · $10k+" /></div>
-            <div className="grid grid-cols-2 gap-3"><div><label className="label">Destination</label><input className="input" name="destination" required placeholder="Developer B" /></div><div><label className="label">SLA (minutes)</label><input className="input" name="sla_minutes" type="number" min={5} defaultValue={60} /></div></div>
+            <div><label className="label" htmlFor="f-name">Rule name</label><input id="f-name" className="input" name="name" required /></div>
+            <div><label className="label" htmlFor="f-match">Match</label><input id="f-match" className="input" name="match" required placeholder="Integration · $10k+" /></div>
+            <div className="grid grid-cols-2 gap-3"><div><label className="label" htmlFor="f-destination">Destination</label><input id="f-destination" className="input" name="destination" required placeholder="Developer B" /></div><div><label className="label" htmlFor="f-sla_minutes">SLA (minutes)</label><input id="f-sla_minutes" className="input" name="sla_minutes" type="number" min={5} defaultValue={60} /></div></div>
             <button className="btn btn-primary">Add rule</button>
           </ActionForm>
         )}</Modal>} />

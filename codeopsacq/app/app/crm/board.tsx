@@ -76,15 +76,15 @@ function DealForm({ members, deal, action, onDone }: { members: Member[]; deal?:
   const { run } = useRun();
   return (
     <ActionForm action={action} onDone={onDone} className="grid gap-3 sm:grid-cols-2" reset={!deal}>
-      <div><label className="label">Company</label><input className="input" name="company" required defaultValue={deal?.company} /></div>
-      <div><label className="label">Opportunity</label><input className="input" name="title" required defaultValue={deal?.title} placeholder="Custom ops portal" /></div>
-      <div><label className="label">Industry</label><input className="input" name="industry" defaultValue={deal?.industry ?? "Other"} /></div>
-      <div><label className="label">Value (USD)</label><input className="input" name="value" type="number" min="0" step="100" required defaultValue={deal ? deal.value_cents / 100 : ""} /></div>
-      <div><label className="label">Owner</label><select className="input" name="owner_id" defaultValue={deal?.owner_id ?? ""}><option value="">Unassigned</option>{members.map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}</select></div>
-      <div><label className="label">AI fit score</label><input className="input" name="ai_score" type="number" min="0" max="100" defaultValue={deal?.ai_score ?? 60} /></div>
-      <div><label className="label">Contact name</label><input className="input" name="contact_name" defaultValue={deal?.contact_name ?? ""} /></div>
-      <div><label className="label">Contact email</label><input className="input" name="contact_email" type="email" defaultValue={deal?.contact_email ?? ""} /></div>
-      <div className="sm:col-span-2"><label className="label">Next step</label><input className="input" name="next_step" defaultValue={deal?.next_step ?? ""} placeholder="Send proposal Thursday" /></div>
+      <div><label className="label" htmlFor="f-company">Company</label><input id="f-company" className="input" name="company" required defaultValue={deal?.company} /></div>
+      <div><label className="label" htmlFor="f-title">Opportunity</label><input id="f-title" className="input" name="title" required defaultValue={deal?.title} placeholder="Custom ops portal" /></div>
+      <div><label className="label" htmlFor="f-industry">Industry</label><input id="f-industry" className="input" name="industry" defaultValue={deal?.industry ?? "Other"} /></div>
+      <div><label className="label" htmlFor="f-value">Value (USD)</label><input id="f-value" className="input" name="value" type="number" min="0" step="100" required defaultValue={deal ? deal.value_cents / 100 : ""} /></div>
+      <div><label className="label" htmlFor="f-owner_id">Owner</label><select id="f-owner_id" className="input" name="owner_id" defaultValue={deal?.owner_id ?? ""}><option value="">Unassigned</option>{members.map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}</select></div>
+      <div><label className="label" htmlFor="f-ai_score">AI fit score</label><input id="f-ai_score" className="input" name="ai_score" type="number" min="0" max="100" defaultValue={deal?.ai_score ?? 60} /></div>
+      <div><label className="label" htmlFor="f-contact_name">Contact name</label><input id="f-contact_name" className="input" name="contact_name" defaultValue={deal?.contact_name ?? ""} /></div>
+      <div><label className="label" htmlFor="f-contact_email">Contact email</label><input id="f-contact_email" className="input" name="contact_email" type="email" defaultValue={deal?.contact_email ?? ""} /></div>
+      <div className="sm:col-span-2"><label className="label" htmlFor="f-next_step">Next step</label><input id="f-next_step" className="input" name="next_step" defaultValue={deal?.next_step ?? ""} placeholder="Send proposal Thursday" /></div>
       <div className="flex justify-between gap-2 sm:col-span-2">
         {deal ? <button type="button" className="btn btn-danger btn-sm" onClick={() => confirm(`Delete ${deal.company}?`) && run(() => deleteDeal(deal.id), "Deal deleted", onDone)}>Delete</button> : <span />}
         <button className="btn btn-primary">{deal ? "Save" : "Add to Lead"}</button>

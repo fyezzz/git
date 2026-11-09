@@ -8,10 +8,10 @@ type T = Awaited<ReturnType<typeof getTemplates>>[number];
 function Form({ t }: { t?: T }) {
   return (
     <ActionForm action={saveTemplate.bind(null, t?.id ?? null)} className="grid gap-3" reset={!t} success="Template saved">
-      <div className="grid grid-cols-2 gap-3"><div><label className="label">Channel</label><input className="input" name="channel" required defaultValue={t?.channel ?? "Cold email"} /></div><div><label className="label">Status</label><select className="input" name="status" defaultValue={t?.status ?? "draft"}><option value="active">Active</option><option value="draft">Draft</option></select></div></div>
-      <div><label className="label">Name</label><input className="input" name="name" required defaultValue={t?.name} /></div>
-      <div><label className="label">Summary</label><input className="input" name="summary" required defaultValue={t?.summary} /></div>
-      <div><label className="label">Body · use {"{{first_name}}"}, {"{{company}}"}, {"{{signal}}"}</label><textarea className="input font-mono text-xs" name="body" rows={8} required defaultValue={t?.body} /></div>
+      <div className="grid grid-cols-2 gap-3"><div><label className="label" htmlFor="f-channel">Channel</label><input id="f-channel" className="input" name="channel" required defaultValue={t?.channel ?? "Cold email"} /></div><div><label className="label" htmlFor="f-status">Status</label><select id="f-status" className="input" name="status" defaultValue={t?.status ?? "draft"}><option value="active">Active</option><option value="draft">Draft</option></select></div></div>
+      <div><label className="label" htmlFor="f-name">Name</label><input id="f-name" className="input" name="name" required defaultValue={t?.name} /></div>
+      <div><label className="label" htmlFor="f-summary">Summary</label><input id="f-summary" className="input" name="summary" required defaultValue={t?.summary} /></div>
+      <div><label className="label" htmlFor="f-body">Body · use {"{{first_name}}"}, {"{{company}}"}, {"{{signal}}"}</label><textarea id="f-body" className="input font-mono text-xs" name="body" rows={8} required defaultValue={t?.body} /></div>
       <button className="btn btn-primary">Save template</button>
     </ActionForm>
   );

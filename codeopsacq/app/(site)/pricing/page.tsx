@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FaqList } from "@/components/faq-list";
 import { PlanCards } from "@/components/plan-cards";
-import { FAQ, PLANS } from "@/lib/site";
+import { FAQ, INCLUDED, PROTOCOL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Pricing: Agency Software from $99/month",
-  description: "CodeOpsAcq pricing: Starter $99/mo, Growth $299/mo, Scale Flagship $999/mo + rev share (application only). Custom builds $25k–$500k.",
+  title: "Pricing: Done-for-You Agency Builds",
+  description: "Fixed-scope sprints delivered by a seven-developer pod, from $5,000 to $40,000+. Custom builds scoped up to $500k. Price confirmed on a diagnosis call.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -14,41 +14,29 @@ export default function Pricing() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 md:px-6">
       <p className="kicker text-neon">Pricing</p>
-      <h1 className="mt-3 text-5xl font-bold tracking-tight">Agency software from $99/month</h1>
-      <p className="mt-4 max-w-2xl text-lg text-muted">Two tracks. Operators run their agency on Starter or Growth. Builders apply for Scale Flagship and launch with our seven-developer pod.</p>
+      <h1 className="mt-3 max-w-4xl text-5xl font-bold tracking-tight">Done-for-you builds, delivered by the pod</h1>
+      <p className="mt-4 max-w-2xl text-lg text-muted">We don't sell seats. We build the revenue system for you: fixed-scope sprints with a seven-developer pod, running on the CodeOpsAcq workspace. Every engagement starts with a diagnosis call where scope and price are confirmed.</p>
       <div className="mt-12"><PlanCards /></div>
-      <section className="mt-16">
-        <h2 className="text-2xl font-bold">Compare plans</h2>
-        <p className="mt-2 text-muted">Starter and Growth are for agencies running their own operation. Scale Flagship is an application-only incubator for builders launching an agency with our developer pod.</p>
-        <div className="card mt-6 overflow-x-auto">
-          <table className="w-full min-w-[640px] text-sm">
-            <thead className="text-left text-xs uppercase tracking-wider text-muted"><tr><th className="p-4" scope="col">Feature</th>{PLANS.map((p) => <th className="p-4" key={p.name} scope="col">{p.name}</th>)}</tr></thead>
-            <tbody className="divide-y divide-line">
-              {[
-                ["Monthly price", "$99", "$299", "$999 + rev share"],
-                ["Annual price", "$1,188", "$3,588", "$11,988 + rev share"],
-                ["6-stage CRM + Fridge queue", "✓", "✓", "✓"],
-                ["AI lead attribution", "✓", "✓", "✓"],
-                ["Profit catalog & cart", "✓", "✓", "✓"],
-                ["Developer ticket flow", "✓", "✓", "✓"],
-                ["AI Command (8 specialist agents)", "—", "✓", "✓"],
-                ["Lead ops review queue + outreach templates", "—", "✓", "✓"],
-                ["Team routing & fulfillment visibility", "—", "✓", "✓"],
-                ["Legal vault + invoices", "—", "✓", "✓"],
-                ["30-day structured activation", "—", "—", "✓"],
-                ["Seven-developer pod build capacity", "—", "—", "✓ (finite)"],
-                ["Who it is for", "Solo operators", "Growing agencies", "Accepted builders"],
-              ].map(([f, ...v]) => <tr key={f}><th className="p-4 text-left font-medium" scope="row">{f}</th>{v.map((x, i) => <td className={`p-4 ${x === "✓" || x.startsWith("✓") ? "text-neon" : "text-muted"}`} key={i}>{x}</td>)}</tr>)}
-            </tbody>
-          </table>
-        </div>
-      </section>
-      <div className="card mt-8 p-6">
-        <h2 className="text-xl font-semibold">Custom builds and dedicated pods: $25k–$500k</h2>
-        <p className="mt-2 text-muted">AI infrastructure, white-label platforms, data platforms and product pods, scoped against delivery requirements before a quote. <Link className="text-neon hover:underline" href="/solutions/white-label-agency-software">White-label & custom builds →</Link></p>
+      <p className="mt-4 text-sm text-muted">Larger custom platforms, AI infrastructure and white-label builds are scoped from $25k to $500k. <Link className="text-neon hover:underline" href="/solutions/white-label-agency-software">Custom builds →</Link></p>
+
+      <div className="mt-16 grid gap-6 md:grid-cols-2">
+        <section className="card p-6">
+          <h2 className="text-2xl font-bold">How every sprint runs</h2>
+          <ol className="mt-5 space-y-3">{PROTOCOL.map((s, i) => <li key={s} className="flex gap-3"><span className="font-mono text-neon">{String(i + 1).padStart(2, "0")}</span><span className="text-muted">{s}</span></li>)}</ol>
+        </section>
+        <section className="card p-6">
+          <h2 className="text-2xl font-bold">Included with every engagement</h2>
+          <ul className="mt-5 space-y-3">{INCLUDED.map((s) => <li key={s} className="flex gap-3"><span className="text-neon">✓</span><span className="text-muted">{s}</span></li>)}</ul>
+        </section>
       </div>
-      <p className="mt-6 text-sm text-muted">CodeOpsAcq guarantees defined platform access, structured activation and developer capacity terms. It does not guarantee lead volume, booked calls, close rates or revenue.</p>
-      <div className="mx-auto mt-20 max-w-3xl"><h2 className="mb-6 text-2xl font-bold">Pricing questions</h2><FaqList items={FAQ.filter((f) => /cost|guarantee|incubator|Scale/i.test(f.q))} /></div>
+
+      <section className="card mt-6 flex flex-wrap items-center justify-between gap-4 p-6">
+        <div><h2 className="text-xl font-semibold">Not sure which sprint fits?</h2><p className="mt-1 text-muted">Twenty minutes, five questions. We find the constraint and scope the build that removes it.</p></div>
+        <Link href="/book" className="btn btn-primary px-5 py-3">Book a diagnosis →</Link>
+      </section>
+
+      <p className="mt-6 text-sm text-muted">Guarantees cover delivery scope and timelines agreed at kickoff, never revenue. Final scope and price are confirmed on a call; timelines start at kickoff.</p>
+      <div className="mx-auto mt-20 max-w-3xl"><h2 className="mb-6 text-2xl font-bold">Pricing questions</h2><FaqList items={FAQ.filter((f) => /cost|guarantee|outreach/i.test(f.q))} /></div>
     </div>
   );
 }

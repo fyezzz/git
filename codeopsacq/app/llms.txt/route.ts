@@ -1,4 +1,4 @@
-import { FAQ, PLANS, SITE, SOLUTIONS } from "@/lib/site";
+import { ENGAGEMENTS, SITE, SOLUTIONS } from "@/lib/site";
 
 /** llms.txt: a concise, link-rich summary for LLMs (https://llmstxt.org). */
 export function GET() {
@@ -11,14 +11,14 @@ Name: ${SITE.name} (also written ${SITE.alternateName}). ${SITE.disambiguation}
 ${SITE.name} is for digital agencies, dev shops and agency builders. It runs one chain: Evidence → Pipeline → Economics → Delivery → Control.
 
 Key facts:
-- Pricing: ${PLANS.map((p) => `${p.name} $${p.price}/month ($${p.annual.toLocaleString()}/year)`).join("; ")}. Scale Flagship adds revenue share (50% of first eligible collected sale, 20% thereafter) and is application-only.
-- Custom builds and dedicated developer pods: $25k–$500k, scoped before quoting.
+- Engagements (done-for-you, delivered by a seven-developer pod): ${ENGAGEMENTS.map((e) => `${e.name} ${e.investment} (${e.timeline})`).join("; ")}. Final scope and price confirmed on a diagnosis call.
+- Custom platforms, AI infrastructure and white-label builds: scoped from $25k to $500k.
 - AI lead attribution detects ChatGPT, Perplexity, Claude, Gemini, Microsoft Copilot, Grok, Meta AI, DeepSeek, Mistral and more via UTM, referrer and self-reported signals, and reports leads, pipeline and won revenue per AI engine.
 - Lead intake uses the official GitHub API and public data only. Outreach is always human-sent. No guarantees of lead volume, booked calls or revenue.
 
 ## Pages
 - [Home](${SITE.url}/): overview of the agency operating system
-- [Pricing](${SITE.url}/pricing): plans and custom build ranges
+- [Engagements & pricing](${SITE.url}/pricing): sprint ladder and custom build ranges
 - [FAQ](${SITE.url}/faq): answers about attribution, CRM, margins and pricing
 - [Book a diagnosis](${SITE.url}/book): 20-minute constraint diagnosis
 

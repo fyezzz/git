@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { HEARD_FROM_OPTIONS } from "@/lib/attribution";
+import { PLAN_OPTIONS as PLANS } from "@/lib/site";
 
-const PLANS = ["Starter", "Growth", "Scale Flagship", "Custom build", "Not sure yet"];
 
 export function BookForm({ plan }: { plan?: string }) {
   const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
@@ -42,8 +42,8 @@ export function BookForm({ plan }: { plan?: string }) {
       <div><label className="label" htmlFor="name">Name</label><input className="input" id="name" name="name" autoComplete="name" required />{err("name")}</div>
       <div><label className="label" htmlFor="email">Work email</label><input className="input" id="email" name="email" type="email" autoComplete="email" required />{err("email")}</div>
       <div><label className="label" htmlFor="company">Agency / company</label><input className="input" id="company" name="company" autoComplete="organization" required />{err("company")}</div>
-      <div><label className="label" htmlFor="plan">Interested in</label><select className="input" id="plan" name="plan" defaultValue={PLANS.includes(plan ?? "") ? plan : "Not sure yet"}>{PLANS.map((p) => <option key={p}>{p}</option>)}</select></div>
-      <div><label className="label" htmlFor="budget">Project budget</label><select className="input" id="budget" name="budget" defaultValue="5k_25k"><option value="under_5k">Under $5k</option><option value="5k_25k">$5k–$25k</option><option value="25k_100k">$25k–$100k</option><option value="100k_plus">$100k+</option></select></div>
+      <div><label className="label" htmlFor="plan">Engagement</label><select className="input" id="plan" name="plan" defaultValue={PLANS.includes(plan ?? "") ? plan : "Not sure yet"}>{PLANS.map((p) => <option key={p}>{p}</option>)}</select></div>
+      <div><label className="label" htmlFor="budget">Project budget</label><select className="input" id="budget" name="budget" defaultValue="10k_25k"><option value="5k_10k">$5k–$10k</option><option value="10k_25k">$10k–$25k</option><option value="25k_50k">$25k–$50k</option><option value="50k_plus">$50k+</option></select></div>
       <div>
         <label className="label" htmlFor="heard_from">How did you hear about us?</label>
         <select className="input" id="heard_from" name="heard_from" required value={heard} onChange={(e) => setHeard(e.target.value)}>

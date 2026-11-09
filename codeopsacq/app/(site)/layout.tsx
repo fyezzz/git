@@ -2,7 +2,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/json-ld";
 import { Wordmark } from "@/components/logo";
 import { Tracker } from "@/components/tracker";
-import { PLANS, SITE, SOLUTIONS } from "@/lib/site";
+import { ENGAGEMENTS, SITE, SOLUTIONS } from "@/lib/site";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -22,7 +22,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             description: SITE.description,
             url: SITE.url,
             publisher: { "@id": `${SITE.url}/#org` },
-            offers: PLANS.map((p) => ({ "@type": "Offer", name: p.name, price: p.price, priceCurrency: "USD", url: `${SITE.url}/pricing`, priceSpecification: { "@type": "UnitPriceSpecification", price: p.price, priceCurrency: "USD", billingDuration: "P1M", unitText: "MONTH" } })),
+            offers: ENGAGEMENTS.map((e) => ({ "@type": "Offer", name: e.name, description: e.scope, url: `${SITE.url}/pricing`, priceCurrency: "USD", priceSpecification: { "@type": "PriceSpecification", priceCurrency: "USD", minPrice: e.min, ...(e.max ? { maxPrice: e.max } : {}) } })),
             featureList: ["6-stage agency CRM", "AI lead attribution (ChatGPT, Perplexity, Claude, Gemini, Copilot)", "Agency profit calculator and catalog", "Developer ticketing and capacity", "AI Command with 8 specialist agents", "Compliant GitHub lead intake", "Legal vault and invoices"],
           },
         ]}
@@ -36,7 +36,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             <Link href="/solutions/ai-lead-attribution" className="hover:text-text">AI attribution</Link>
             <Link href="/solutions/agency-crm" className="hover:text-text">CRM</Link>
             <Link href="/solutions/agency-profit-calculator" className="hover:text-text">Profit</Link>
-            <Link href="/pricing" className="hover:text-text">Pricing</Link>
+            <Link href="/pricing" className="hover:text-text">Engagements</Link>
             <Link href="/faq" className="hover:text-text">FAQ</Link>
           </nav>
           <div className="flex items-center gap-2">
@@ -59,7 +59,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
           <div>
             <p className="kicker mb-3">Company</p>
             <ul className="space-y-2 text-muted">
-              <li><Link className="hover:text-neon" href="/pricing">Pricing</Link></li>
+              <li><Link className="hover:text-neon" href="/pricing">Engagements & pricing</Link></li>
               <li><Link className="hover:text-neon" href="/faq">FAQ</Link></li>
               <li><Link className="hover:text-neon" href="/book">Book a diagnosis</Link></li>
               <li><a className="hover:text-neon" href="/llms.txt">llms.txt</a></li>

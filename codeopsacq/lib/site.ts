@@ -25,26 +25,35 @@ export const SITE = {
     "white-label agency software",
     "lead generation software for agencies",
     "AI agents for agency operations",
-    "agency incubator",
+    "done-for-you agency builds",
+    "AI automation agency",
   ],
   email: "hello@codeopsacq.com",
 };
 
-export const PLANS = [
-  { name: "Starter", price: 99, annual: 1188, track: "Track A · Operators", for: "Solo operators and compact agencies who need one source of truth.", features: ["6-stage CRM + Fridge queue", "Contact context & evidence", "Profit catalog & cart", "Developer ticket flow", "AI lead attribution"] },
-  { name: "Growth", price: 299, annual: 3588, track: "Track A · Operators", for: "Growing agencies with team members, contractors and multiple workstreams.", features: ["Everything in Starter", "AI Command Orchestrator (8 specialists)", "Lead Ops review queue + outreach templates", "Team routing & fulfillment visibility", "Marketing control room", "Legal vault + invoices"], featured: true },
-  { name: "Scale Flagship", price: 999, annual: 11988, track: "Track B · Incubator builders", for: "Accepted builders launching an agency on CodeOpsAcq. Application only, gated by real developer capacity.", features: ["Full platform access", "Structured 30-day activation", "Finite 7-developer team build capacity", "Incubator coaching & review schedule", "Rev share: 50% of first eligible collected sale, 20% thereafter, per signed addendum"] },
+/** Done-for-you engagements, delivered by the pod. Same ladder as the CodeOpsAcq site. Final scope and price confirmed on a call. */
+export const ENGAGEMENTS = [
+  { name: "Foundation Sprint", scope: "AI voice reps, webhooks, data collection", investment: "$5,000 – $7,500", min: 5000, max: 7500, timeline: "3–14 days" },
+  { name: "Growth Automation Engine", scope: "Outreach systems, CRM builds, ad infrastructure", investment: "$10,000 – $15,000", min: 10000, max: 15000, timeline: "7–14 days" },
+  { name: "Custom Software", scope: "SaaS MVPs, internal tools, ERPs", investment: "$17,500 – $25,000", min: 17500, max: 25000, timeline: "14–25 days" },
+  { name: "Acquisition Ecosystem", scope: "Full-funnel ads, SDR pods, omnichannel outbound", investment: "$27,500 – $35,000", min: 27500, max: 35000, timeline: "14–30 days", featured: true },
+  { name: "Dedicated Squad", scope: "Enterprise AI builds with a dedicated developer team", investment: "$40,000+", min: 40000, max: null, timeline: "30–45 days" },
 ] as const;
+
+/** Booking-form options: every engagement plus custom and undecided. */
+export const PLAN_OPTIONS: [string, ...string[]] = [ENGAGEMENTS[0].name, ...ENGAGEMENTS.slice(1).map((e) => e.name), "Custom platform ($25k+)", "Not sure yet"];
+
+export const PROTOCOL = ["Kickoff call to lock scope and acceptance criteria", "Active sprints with the seven-developer pod", "QA gates before anything ships", "Recorded handover walkthrough"];
+export const INCLUDED = ["The CodeOpsAcq workspace: CRM, profit catalog, developer tickets, fulfillment", "AI lead attribution across ChatGPT, Perplexity, Claude and more", "AI Command with eight specialist analysts", "Audit history on every change"];
 
 export const FAQ = [
   { q: "What is CodeOpsAcq?", a: "CodeOpsAcq is an agency operating system. It replaces the separate CRM, spreadsheet pricing, ticket tracker and reporting tools agencies stitch together, with one workspace that runs Evidence → Pipeline → Economics → Delivery → Control." },
   { q: "How does AI lead attribution work?", a: "Every visit is classified by UTM tags (ChatGPT adds utm_source=chatgpt.com to cited links), then by referrer host (chatgpt.com, perplexity.ai, claude.ai, gemini.google.com, copilot.microsoft.com and more), then by the lead's own answer to “How did you hear about us?”. The self-reported answer recovers AI traffic that arrives with no referrer. First and last touch are stored on every CRM deal, so you can see leads, pipeline and won revenue by AI assistant." },
   { q: "Can I see how much pipeline ChatGPT or Perplexity sends me?", a: "Yes. The Attribution room shows visitors, leads, open pipeline and won revenue per channel and per AI engine, with the confidence of each attribution (UTM, referrer or self-reported)." },
-  { q: "How much does CodeOpsAcq cost?", a: "Starter is $99/month ($1,188/year), Growth is $299/month ($3,588/year), and Scale Flagship is $999/month ($11,988/year) plus revenue share, application only. Custom builds are scoped separately from $25k to $500k." },
+  { q: "How much does CodeOpsAcq cost?", a: "CodeOpsAcq works as done-for-you engagements delivered by a seven-developer pod: Foundation Sprint $5,000–$7,500, Growth Automation Engine $10,000–$15,000, Custom Software $17,500–$25,000, Acquisition Ecosystem $27,500–$35,000, and Dedicated Squad from $40,000. Final scope and price are confirmed on a diagnosis call." },
   { q: "Does CodeOpsAcq send outreach automatically?", a: "No. Lead ops and outreach templates support human-reviewed execution. Nothing is sent without a person taking the action, and the suppression list is enforced on every lead." },
   { q: "Where do leads come from in Lead Ops?", a: "From the official GitHub REST API using public organization and repository data only. There is no private email discovery, LinkedIn scraping or Google scraping." },
   { q: "Does CodeOpsAcq guarantee revenue or booked calls?", a: "No. CodeOpsAcq guarantees defined platform access, structured activation and developer capacity terms. It does not guarantee lead volume, booked calls, close rates or revenue." },
-  { q: "Who is the Scale Flagship incubator for?", a: "Builders launching an agency on CodeOpsAcq. It includes full platform access, a 30-day activation, finite capacity from a seven-developer pod and coaching. Revenue share is 50% of the first eligible collected sale and 20% thereafter, governed by a signed addendum." },
 ];
 
 export interface Solution {
@@ -101,7 +110,7 @@ export const SOLUTIONS: Solution[] = [
     forWho: ["Agencies selling custom or productized work where margin varies by deal.", "Small teams that need one owner and one next step on every opportunity.", "Owners tired of re-keying won deals into a separate delivery tool."],
     compare: [["After closed-won", "Deal leaves the CRM", "Deal flows into priced tickets and delivery"], ["Margin", "Unknown until invoicing", "Modeled per item before the quote"], ["Stalled deals", "Found in a weekly review", "Flagged by the pipeline analyst after 5 days"], ["Opt-outs", "Separate list, easy to miss", "Suppression enforced on every capture path"]],
     faqs: [
-      { q: "What is the best CRM for a small agency?", a: "One that connects sales to delivery. CodeOpsAcq Starter ($99/month) includes the 6-stage CRM, profit catalog and developer tickets in one workspace." },
+      { q: "Is the CRM sold on its own?", a: "No. The CRM is part of the CodeOpsAcq workspace that every engagement runs on, so pipeline, pricing and delivery live in one place from day one." },
       { q: "Can I import my existing deals?", a: "Yes. The 30-day activation includes a revenue load phase that imports active contacts and opportunities with stage, owner, value and next action." },
     ],
   },

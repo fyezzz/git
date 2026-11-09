@@ -1,3 +1,4 @@
+import { ENGAGEMENTS } from "./site";
 /** Starting workspace data, mirroring the CodeOpsAcq showcase. Runs once on an empty database. */
 const lit = (v: unknown): string => {
   if (v === null || v === undefined) return "NULL";
@@ -42,12 +43,9 @@ const SUBSCRIPTIONS: [string, string, number, string, number][] = [
   ["Meridian Labs", "Dedicated pod", 61000, "active", 220],
   ["Atlas Freight", "Dedicated pod", 54000, "active", 300],
   ["Lumen Clinics", "Custom retainer", 29500, "active", 95],
-  ["Orbit Media", "Scale Flagship", 999, "active", 120],
-  ["Quarry Labs", "Scale Flagship", 999, "active", 60],
-  ["Nimbus Agency", "Growth", 299, "active", 200],
-  ["Foundry North", "Growth", 299, "active", 75],
-  ["Brightpath", "Starter", 99, "active", 40],
-  ["Solace Digital", "Growth", 299, "cancelled", 180],
+  ["Orbit Media", "Growth retainer", 12500, "active", 120],
+  ["Quarry Labs", "Growth retainer", 9500, "active", 60],
+  ["Solace Digital", "Custom retainer", 18000, "cancelled", 180],
 ];
 
 const REVIEWS: [string, string, number, string, string, number][] = [
@@ -77,11 +75,6 @@ const TICKETS: [string, string, string, string, number, string, number][] = [
   ["Proposal generator", "Web application", "standard", "scoping", 0, null as unknown as string, 28],
 ];
 
-const CATALOG: [string, string, string, string, number | null, number, number | null, number | null][] = [
-  ["SaaS plans", "Starter", "Core agency operations for a lean operator: 6-stage CRM, Fridge queue, profit catalog, developer tickets.", "plan", 99, 0, null, null],
-  ["SaaS plans", "Growth", "Team workflows, AI Command, lead ops review queue, routing, marketing and legal drafts.", "plan", 299, 0, null, null],
-  ["SaaS plans", "Scale Flagship", "Application-only incubator: full platform, 30-day activation, 7-developer pod capacity. Plus rev share.", "plan", 999, 0, null, null],
-];
 const MODULES: Record<string, [string, string, number][]> = {
   "Entry revenue leak fixes": [
     ["Speed-to-lead responder", "Instant reply to every inbound lead across forms and DMs.", 900],
@@ -278,7 +271,7 @@ VALUES (${lit(company)}, ${lit(industry)}, ${lit(title)}, ${lit(seats)}, ${$(val
   if (demo) parts.push(rows("lead_reviews", ["name", "category", "contributors", "evidence", "classification", "score"], REVIEWS));
   parts.push(rows("suppression", ["value", "reason"], [["donotcontact@example.com", "Opted out"], ["competitor-co.com", "Competitor domain"]]));
   parts.push(rows("sequences", ["name", "touches", "enrolled", "status"], [["Outbound · agencies", 3, 18, "active"], ["Inbound nurture", 3, 31, "active"], ["Reactivation", 3, 9, "active"]]));
-  parts.push(rows("catalog_items", ["category", "name", "description", "kind", "price_cents", "cost_cents", "price_min_cents", "price_max_cents"], CATALOG.map(([c, n, d, k, p, cost]) => [c, n, d, k, p === null ? null : $(p), $(cost), null, null])));
+  parts.push(rows("catalog_items", ["category", "name", "description", "kind", "price_cents", "cost_cents", "price_min_cents", "price_max_cents"], ENGAGEMENTS.map((e) => ["Engagements", e.name, `${e.scope}. ${e.timeline}.`, "enterprise", null, 0, $(e.min), $(e.max ?? e.min * 2)])));
   for (const [cat, items] of Object.entries(MODULES)) {
     parts.push(rows("catalog_items", ["category", "name", "description", "kind", "price_cents", "cost_cents"], items.map(([n, d, cost]) => [cat, n, d, cat === "Add-ons" ? "addon" : "module", null, $(cost)])));
   }

@@ -2,21 +2,22 @@ import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 import { ENGINE_LABEL, HEARD_FROM_OPTIONS, resolveLeadAttribution, type Touch } from "@/lib/attribution";
 import { audit, one, q } from "@/lib/db";
+import { ENGAGEMENTS, PLAN_OPTIONS } from "@/lib/site";
 
 const Lead = z.object({
   name: z.string().trim().min(2).max(120),
   email: z.string().trim().toLowerCase().email().max(200),
   company: z.string().trim().min(2).max(120),
-  plan: z.enum(["Starter", "Growth", "Scale Flagship", "Custom build", "Not sure yet"]),
-  budget: z.enum(["under_5k", "5k_25k", "25k_100k", "100k_plus"]),
+  plan: z.enum(PLAN_OPTIONS),
+  budget: z.enum(["5k_10k", "10k_25k", "25k_50k", "50k_plus"]),
   heard_from: z.enum(HEARD_FROM_OPTIONS),
   heard_detail: z.string().trim().max(200).optional().default(""),
   need: z.string().trim().min(10).max(2000),
   website: z.string().max(0).optional().default(""), // honeypot
 });
 
-const VALUE: Record<string, number> = { under_5k: 300000, "5k_25k": 1500000, "25k_100k": 6000000, "100k_plus": 15000000 };
-const PLAN_VALUE: Record<string, number> = { Starter: 118800, Growth: 358800, "Scale Flagship": 1198800 };
+const VALUE: Record<string, number> = { "5k_10k": 750000, "10k_25k": 1750000, "25k_50k": 3750000, "50k_plus": 7500000 };
+const PLAN_VALUE: Record<string, number> = Object.fromEntries([...ENGAGEMENTS.map((e) => [e.name, e.min * 100] as const), ["Custom platform ($25k+)", 2500000]]);
 
 export const dynamic = "force-dynamic";
 
@@ -42,7 +43,7 @@ export async function POST(req: NextRequest) {
   const heard = d.heard_from === "Another AI assistant" && d.heard_detail ? d.heard_detail : d.heard_from;
   const attr = resolveLeadAttribution(parse(req.cookies.get("cops_ft")?.value), parse(req.cookies.get("cops_lt")?.value), heard);
   const value = d.plan in PLAN_VALUE ? PLAN_VALUE[d.plan]! : VALUE[d.budget]!;
-  const score = Math.min(99, 40 + (d.budget === "100k_plus" ? 30 : d.budget === "25k_100k" ? 22 : d.budget === "5k_25k" ? 12 : 4) + Math.min(20, Math.floor(d.need.split(/\s+/).length / 4)) + (attr.channel === "ai_assistant" ? 5 : 0));
+  const score = Math.min(99, 40 + (d.budget === "50k_plus" ? 30 : d.budget === "25k_50k" ? 22 : d.budget === "10k_25k" ? 14 : 8) + Math.min(20, Math.floor(d.need.split(/\s+/).length / 4)) + (attr.channel === "ai_assistant" ? 5 : 0));
 
   const deal = await one<{ id: string }>(
     `INSERT INTO deals (company, title, industry, value_cents, stage, ai_score, signal, contact_name, contact_email, next_step, channel, ai_engine, attribution)

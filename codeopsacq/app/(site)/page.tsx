@@ -81,10 +81,11 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-24 md:px-6">
-        <p className="kicker text-neon">Pricing</p>
-        <h2 className="mb-10 mt-3 text-4xl font-bold tracking-tight md:text-5xl">Start with the smallest fit.</h2>
+        <p className="kicker text-neon">Engagements</p>
+        <h2 className="mb-4 mt-3 text-4xl font-bold tracking-tight md:text-5xl">Done-for-you builds, delivered by the pod.</h2>
+        <p className="mb-10 max-w-2xl text-muted">Fixed-scope sprints with a seven-developer team, running on the CodeOpsAcq workspace. Scope and price are confirmed on a diagnosis call.</p>
         <PlanCards />
-        <p className="mt-6 text-sm text-muted">Custom builds and dedicated pods are scoped separately from $25k to $500k.</p>
+        <p className="mt-6 text-sm text-muted">Custom platforms and AI infrastructure are scoped from $25k to $500k.</p>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-12 md:px-6">
